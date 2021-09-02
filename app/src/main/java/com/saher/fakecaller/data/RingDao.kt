@@ -1,0 +1,21 @@
+package com.saher.fakecaller.data
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Query
+import android.net.Uri
+import androidx.room.Update
+
+@Dao
+interface RingDao {
+
+    //getting Uri for media player
+    @Query("Select uri from RingTone")
+    fun getUri(): LiveData<Uri>
+
+    //Updating Uri in db
+    @Update
+    fun updateUri(uri: Uri)
+
+
+}

@@ -7,8 +7,8 @@ import java.util.*
 
 @Entity
 data class Contact(
-    @PrimaryKey
-    val id: UUID = UUID.randomUUID(),
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0L,
     val name: String,
     val land_line : Int,
     val mobile: Int,

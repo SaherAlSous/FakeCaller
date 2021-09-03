@@ -10,7 +10,7 @@ import androidx.room.Update
 interface RingDao {
 
     //getting Uri for media player
-    @Query("Select uri from RingTone")
+    @Query("Select * From RingTone")
     fun getUri(): LiveData<Uri>
 
     //Updating Uri in db

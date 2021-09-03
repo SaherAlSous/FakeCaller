@@ -31,7 +31,6 @@ class MainActivity : ComponentActivity() {
                     val roomViewModel: RoomViewModel = viewModel(
                         factory = RoomViewModelFactory(context.applicationContext as Application)
                     )
-
                     Greeting("Android")
                 }
             }
@@ -41,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+      Text(text = "Hello $name!")
 }
 
 @Preview(showBackground = true)

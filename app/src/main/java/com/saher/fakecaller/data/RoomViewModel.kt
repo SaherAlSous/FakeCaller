@@ -4,7 +4,6 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import java.util.*
 
 class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -16,11 +15,11 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
         val userDao = DataBase.getInstance(application).UserDao()
         val ringDao = DataBase.getInstance(application).RingDao()
         repository = Repository(userDao, ringDao)
-        readContactList = repository.getContacts()
+        readContactList = repository.getContacts
         readFileUri = repository.getUri()
     }
 
-    suspend fun getContact(id:UUID): LiveData<Contact>{
+    suspend fun getContact(id:Long): LiveData<Contact>{
         return repository.getContact(id)
     }
 
@@ -30,6 +29,10 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateContact(contact: Contact){
         repository.updateContact(contact)
+    }
+
+    fun deleteContact(contact: Contact){
+        repository.deleteContact(contact)
     }
 
     fun updateUri(uri: Uri){

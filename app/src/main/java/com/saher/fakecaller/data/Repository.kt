@@ -1,9 +1,7 @@
 package com.saher.fakecaller.data
 
-import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.LiveData
-import androidx.room.Room
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,10 +19,10 @@ class Repository(
     private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO + job)
 
     //getting contacts to UI
-    fun getContacts():LiveData<List<Contact>> = userDao.getContacts()
+    val getContacts:LiveData<List<Contact>> = userDao.getAll()
 
     //getting contact to contact page
-    suspend fun getContact(id:UUID):LiveData<Contact> = userDao.getContact(id)
+    suspend fun getContact(id:Long):LiveData<Contact> = userDao.getContact(id)
 
     //updating contact
     fun updateContact(contact: Contact) {
@@ -40,6 +38,15 @@ class Repository(
         executor.execute {
             ioScope.launch {
                 userDao.addContact(contact)
+            }
+        }
+    }
+
+    //Deleting Contact
+    fun deleteContact(contact: Contact){
+        executor.execute{
+            ioScope.launch {
+                userDao.deleteContact(contact)
             }
         }
     }

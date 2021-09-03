@@ -1,9 +1,11 @@
 package com.saher.fakecaller.data
 
 import android.app.Application
+import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 
 class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -12,8 +14,9 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     private val repository : Repository
 
     init {
-        val userDao = DataBase.getInstance(application).UserDao()
-        val ringDao = DataBase.getInstance(application).RingDao()
+        val dbInstance = DataBase.getInstance(application)
+        val userDao = dbInstance.UserDao()
+        val ringDao = dbInstance.RingDao()
         repository = Repository(userDao, ringDao)
         readContactList = repository.getContacts
         readFileUri = repository.getUri()

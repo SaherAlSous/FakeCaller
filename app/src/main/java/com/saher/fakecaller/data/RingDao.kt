@@ -15,7 +15,7 @@ interface RingDao {
 
     //Updating Uri in db
     @Update
-    fun updateUri(uri: Uri)
+    suspend fun updateUri(uri: Uri)
 
 
 }

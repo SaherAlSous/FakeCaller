@@ -1,5 +1,6 @@
-package com.saher.fakecaller
+package com.saher.fakecaller.ui
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,8 +10,12 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.ui.theme.FakeCallerTheme
+import com.saher.fakecaller.util.RoomViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +27,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    val context = LocalContext.current
+                    val roomViewModel: RoomViewModel = viewModel(
+                        factory = RoomViewModelFactory(context.applicationContext as Application)
+                    )
+
                     Greeting("Android")
                 }
             }

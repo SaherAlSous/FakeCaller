@@ -16,14 +16,14 @@ interface UserDao {
     fun getContacts() : LiveData<List<Contact>>
 
     //getting data for selected contact page
-    @Query("Select * From Contact Where id=(:id)")
-    fun getContact(id: UUID): LiveData<Contact>
+    @Query("Select * From Contact Where id=:id")
+    suspend fun getContact(id: UUID): LiveData<Contact>
 
     //updating contact details
     @Update
-    fun updateContact(contact: Contact)
+    suspend fun updateContact(contact: Contact)
 
     @Insert
-    fun addContact(contact: Contact)
+    suspend fun addContact(contact: Contact)
 
 }

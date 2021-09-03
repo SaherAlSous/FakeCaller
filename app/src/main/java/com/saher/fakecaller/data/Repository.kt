@@ -4,57 +4,58 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.*
 import java.util.concurrent.Executors
 
-private const val DATABASE_NAME = "FakeCaller"
 
-class Repository private constructor(context: Context){
-
-    private val dataBase : DataBase = Room.databaseBuilder(
-        context.applicationContext,
-        DataBase::class.java,
-        DATABASE_NAME).build()
-
-    private val userDao = dataBase.UserDao()
-    private val ringDao = dataBase.RingDao()
+class Repository(
+    private val userDao: UserDao,
+    private val ringDao: RingDao
+){
     private val executor = Executors.newSingleThreadExecutor()
-    private val fileDir = context.applicationContext.filesDir
-
+    private val job = Job()
+    private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO + job)
 
     //getting contacts to UI
     fun getContacts():LiveData<List<Contact>> = userDao.getContacts()
 
     //getting contact to contact page
-    fun getContact(id:UUID):LiveData<Contact> = userDao.getContact(id)
+    suspend fun getContact(id:UUID):LiveData<Contact> = userDao.getContact(id)
 
     //updating contact
-    fun updateContact(contact: Contact) = userDao.updateContact(contact)
+    fun updateContact(contact: Contact) {
+        executor.execute {
+            ioScope.launch {
+                userDao.updateContact(contact)
+            }
+        }
+    }
 
     //adding new contact
-    fun addContact(contact: Contact) = userDao.addContact(contact)
+    fun addContact(contact: Contact) {
+        executor.execute {
+            ioScope.launch {
+                userDao.addContact(contact)
+            }
+        }
+    }
 
 
     //getting Ringtone Uri to media player
     fun getUri():LiveData<Uri> = ringDao.getUri()
 
     //updating Uri from setting page
-    fun updateUri(uri: Uri) = ringDao.updateUri(uri)
-
-    //Initializing the Repository
-    companion object{
-        @Volatile
-        private var instance : Repository? = null
-
-        fun initialize(context: Context)=
-            instance?: synchronized(
-                this
-            ){
-                instance?: Repository(context).also {
-                    instance = it
-                }
+    fun updateUri(uri: Uri) {
+        executor.execute{
+            ioScope.launch {
+                ringDao.updateUri(uri)
             }
-
+        }
     }
+
 
 }

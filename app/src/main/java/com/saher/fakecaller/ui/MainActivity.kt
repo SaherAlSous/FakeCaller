@@ -24,8 +24,7 @@ class MainActivity : ComponentActivity() {
                         factory = RoomViewModelFactory(context as Application)
                     )
                 Column() {
-                    AppBar()
-                    NavigationComponent()
+                    NavigationComponent(roomViewModel)
                 }
         }
     }

@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 data class RingTone(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0L,
+    @PrimaryKey
+    val id: UUID = UUID.randomUUID(),
     val uri: Uri
 )

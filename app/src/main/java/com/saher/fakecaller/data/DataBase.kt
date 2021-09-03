@@ -9,6 +9,7 @@ private const val DATABASE_NAME = "FakeCaller"
 
 
 @Database(entities = [Contact::class, RingTone::class], version = 1, exportSchema = false)
+@TypeConverters(IDTypeConverter::class)
 abstract class DataBase:RoomDatabase() {
 
     abstract fun UserDao(): UserDao

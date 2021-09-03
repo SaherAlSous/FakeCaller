@@ -2,3 +2,23 @@
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+buildscript {
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.0-alpha10'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
+    }
+}
+
+allprojects {
+    configurations.all {
+        resolutionStrategy {
+            cacheChangingModulesFor 0, 'seconds'
+        }
+    }
+}

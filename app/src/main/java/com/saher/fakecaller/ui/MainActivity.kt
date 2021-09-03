@@ -27,9 +27,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val context = LocalContext.current
+                    val context = applicationContext
                     val roomViewModel: RoomViewModel = viewModel(
-                        factory = RoomViewModelFactory(context.applicationContext as Application)
+                        factory = RoomViewModelFactory(context as Application)
                     )
                     Greeting("Android")
                 }

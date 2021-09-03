@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
     val readContactList : LiveData<List<Contact>>
-    val readFileUri: LiveData<Uri>
+    val readFileUri: LiveData<RingTone>
     private val repository : Repository
 
     init {
@@ -38,8 +38,8 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteContact(contact)
     }
 
-    fun updateUri(uri: Uri){
-        repository.updateUri(uri)
+    fun updateUri(ringTone: RingTone){
+        repository.updateUri(ringTone)
     }
 
 }

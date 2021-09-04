@@ -1,4 +1,4 @@
-package com.saher.fakecaller.ui.components
+package com.saher.fakecaller.ui.components.settings
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
@@ -9,20 +9,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.saher.fakecaller.R
 
-@Preview
+
 @Composable
-fun AppBar() {
+fun SettingsAppBar() {
     TopAppBar(
-        title = { Text(text = "Fake Caller") },
+        title = { Text(text = "Settings") },
         backgroundColor = Color.LightGray,
         navigationIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.ic_alarm_24),
-                contentDescription = "Settings",
+                painter = painterResource(id = R.drawable.ic_arrow_back_24),
+                contentDescription = "Back to Contacts",
                 modifier =
                 Modifier
                     .padding(start = 15.dp)

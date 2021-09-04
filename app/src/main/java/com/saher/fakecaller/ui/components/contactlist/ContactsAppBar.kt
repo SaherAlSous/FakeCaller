@@ -8,9 +8,11 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.layoutId
 import com.saher.fakecaller.R
 
 @Preview
@@ -19,6 +21,7 @@ fun AppBar() {
     TopAppBar(
         title = { Text(text = "Fake Caller") },
         backgroundColor = Color.LightGray,
+        modifier = Modifier.layoutId("actionbar"),
         navigationIcon = {
             Icon(
                 painter = painterResource(id = R.drawable.ic_alarm_24),

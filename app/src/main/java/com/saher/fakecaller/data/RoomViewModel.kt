@@ -1,11 +1,10 @@
 package com.saher.fakecaller.data
 
 import android.app.Application
-import android.content.Context
-import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+import com.saher.fakecaller.data.contacts.Contact
+import com.saher.fakecaller.data.ringtone.RingTone
 
 class RoomViewModel(application: Application) : AndroidViewModel(application) {
 

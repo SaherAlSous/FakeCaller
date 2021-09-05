@@ -1,8 +1,11 @@
 package com.saher.fakecaller.data
 
-import android.app.Application
 import android.content.Context
 import androidx.room.*
+import com.saher.fakecaller.data.contacts.Contact
+import com.saher.fakecaller.data.contacts.UserDao
+import com.saher.fakecaller.data.ringtone.RingDao
+import com.saher.fakecaller.data.ringtone.RingTone
 
 
 private const val DATABASE_NAME = "FakeCaller"
@@ -14,7 +17,7 @@ abstract class DataBase:RoomDatabase() {
 
     abstract fun UserDao(): UserDao
 
-    abstract fun RingDao():RingDao
+    abstract fun RingDao(): RingDao
 
 //Implementing the DataBase
     companion object {

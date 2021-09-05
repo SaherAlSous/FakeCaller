@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
-import com.saher.fakecaller.data.Contact
+import com.saher.fakecaller.data.contacts.Contact
 
 @Preview
 @Composable

@@ -1,6 +1,5 @@
-package com.saher.fakecaller.data
+package com.saher.fakecaller.data.ringtone
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query

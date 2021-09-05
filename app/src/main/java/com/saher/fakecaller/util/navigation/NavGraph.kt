@@ -11,6 +11,7 @@ class NavGraph(navController: NavController) {
     object Destinations{
         const val home = "home"
         const val settings = "settings"
+        const val contact = "contact"
     }
 
 }

@@ -25,7 +25,7 @@ open class MainActivity : ComponentActivity() {
                         factory = RoomViewModelFactory(context as Application)
                     )
                 Column(modifier = Modifier.fillMaxSize()) {
-                    NavigationComponent(roomViewModel)
+                    NavigationComponent(roomViewModel, context)
                 }
         }
     }

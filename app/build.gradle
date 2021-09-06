@@ -79,10 +79,10 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.1.1")
 
     //Activity
-    implementation 'androidx.activity:activity-ktx:1.4.0-alpha01'
+    api 'androidx.activity:activity-ktx:1.4.0-alpha01'
 
     //Glide Accompanist
-    implementation "dev.chrisbanes.accompanist:accompanist-glide:0.4.2"
+    implementation("dev.chrisbanes.accompanist:accompanist-glide:0.6.2")
 
     //Constraint Layout - Compose
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"

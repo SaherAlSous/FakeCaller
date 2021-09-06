@@ -1,16 +1,13 @@
 package com.saher.fakecaller.ui.components.calling
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 
-@Preview
 @Composable
-fun CallingPage() {
+fun CallingPage(navController: NavController) {
     ConstraintLayout(
         modifier =
         Modifier.fillMaxSize(),
@@ -19,7 +16,7 @@ fun CallingPage() {
         Background()
         CallingText()
         CallTimer()
-        ResponseButtons()
-        RejectButton()
+        ResponseButtons(navController)
+        RejectButton(navController)
     }
 }

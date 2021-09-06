@@ -5,21 +5,20 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 
-@Preview
 @Composable
-fun ContactPage() {
+fun ContactPage(navController: NavController) {
     Surface(color = Color.LightGray) {
         ConstraintLayout(
             modifier = Modifier.fillMaxSize(),
             constraintSet = contactPageConstraints()
         ) {
-            ContactPageBar()
+            ContactPageBar(navController)
             ContactPagePhoto()
             ContactDetails()
-            CallContact()
+            CallContact(navController)
         }
     }
 }

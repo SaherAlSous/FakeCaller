@@ -10,11 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.saher.fakecaller.R
+import com.saher.fakecaller.util.navigation.NavGraph
 
 
 @Composable
-fun SettingsAppBar() {
+fun SettingsAppBar(navController: NavController) {
     TopAppBar(
         title = { Text(text = "Settings") },
         backgroundColor = Color.LightGray,
@@ -25,7 +27,7 @@ fun SettingsAppBar() {
                 modifier =
                 Modifier
                     .padding(start = 15.dp)
-                    .clickable { /*TODO*/ }
+                    .clickable { navController.navigate(NavGraph.Destinations.home) }
             )
         }
     )

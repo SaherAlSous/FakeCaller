@@ -13,11 +13,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.layoutId
+import androidx.navigation.NavController
 import com.saher.fakecaller.R
+import com.saher.fakecaller.util.navigation.NavGraph
 
-@Preview
 @Composable
-fun AppBar() {
+fun AppBar(navController: NavController) {
     TopAppBar(
         title = { Text(text = "Fake Caller") },
         backgroundColor = Color.LightGray,
@@ -29,7 +30,7 @@ fun AppBar() {
                 modifier =
                 Modifier
                     .padding(start = 15.dp)
-                    .clickable { /*TODO*/ }
+                    .clickable { navController.navigate(NavGraph.Destinations.settings) }
             )
         }
     )

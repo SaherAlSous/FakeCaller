@@ -15,11 +15,13 @@ import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.saher.fakecaller.R
+import com.saher.fakecaller.util.navigation.NavGraph
 
-@Preview
+
 @Composable
-fun ResponseButtons() {
+fun ResponseButtons(navController: NavController) {
     Row(
         horizontalArrangement = Arrangement.SpaceAround,
         modifier =
@@ -35,7 +37,7 @@ fun ResponseButtons() {
             modifier = Modifier
                 .border(2.dp, Color.White, CircleShape)
                 .padding(24.dp)
-                .clickable {  }
+                .clickable { navController.navigate(NavGraph.Destinations.contact) }
         )
         Image(
             painter = painterResource(
@@ -49,9 +51,8 @@ fun ResponseButtons() {
         )
     }
 }
-@Preview
 @Composable
-fun RejectButton() {
+fun RejectButton(navController: NavController) {
     Row(
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = Modifier.layoutId("endCall")
@@ -65,7 +66,7 @@ fun RejectButton() {
             modifier = Modifier
                 .border(2.dp, Color.White, CircleShape)
                 .padding(24.dp)
-                .clickable {  }
+                .clickable { navController.navigate(NavGraph.Destinations.contact) }
         )
     }
 }

@@ -10,11 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.saher.fakecaller.util.navigation.NavGraph
 
 @Composable
-fun AddNewContactFAB() {
+fun AddNewContactFAB(navController: NavController) {
     FloatingActionButton(
-        onClick = { /*TODO*/ },
+        onClick = { navController.navigate(NavGraph.Destinations.contact) },
         modifier = Modifier.layoutId("fab"),
         backgroundColor = Color.Black,
         contentColor = Color.White,

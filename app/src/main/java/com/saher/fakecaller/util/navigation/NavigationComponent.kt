@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.saher.fakecaller.data.RoomViewModel
+import com.saher.fakecaller.ui.components.calling.CallingPage
 import com.saher.fakecaller.ui.components.contactlist.Contacts
 import com.saher.fakecaller.ui.components.contactpage.ContactPage
 import com.saher.fakecaller.ui.components.settings.SettingsPage
@@ -20,6 +21,7 @@ fun NavigationComponent(roomViewModel: RoomViewModel) {
             composable(Destinations.home) { Contacts()}
             composable(Destinations.settings){ SettingsPage()}
             composable(Destinations.contact){ ContactPage()}
+            composable(Destinations.calling){CallingPage()}
         }
     }
 }

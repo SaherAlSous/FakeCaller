@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -21,7 +22,10 @@ import com.saher.fakecaller.R
 fun ResponseButtons() {
     Row(
         horizontalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier.layoutId("answeringButtons")
+        modifier =
+        Modifier
+            .layoutId("answeringButtons")
+            .fillMaxWidth()
     ) {
         Image(
             painter = painterResource(
@@ -48,7 +52,10 @@ fun ResponseButtons() {
 @Preview
 @Composable
 fun RejectButton() {
-    Row(        horizontalArrangement = Arrangement.SpaceAround,
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier.layoutId("endCall")
+
     ) {
         Image(
             painter = painterResource(
@@ -58,7 +65,6 @@ fun RejectButton() {
             modifier = Modifier
                 .border(2.dp, Color.White, CircleShape)
                 .padding(24.dp)
-                .layoutId("endCall")
                 .clickable {  }
         )
     }

@@ -1,6 +1,7 @@
 package com.saher.fakecaller.ui.components.calling
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +19,7 @@ fun Background() {
         alpha = 0.4f,
         alignment = Alignment.TopCenter,
         contentScale = ContentScale.Crop,
-        modifier = Modifier.layoutId("background")
+        modifier = Modifier.layoutId("background").fillMaxSize()
     )
 
 }

@@ -6,14 +6,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.constraintlayout.compose.ConstraintLayout
 
 @Preview
 @Composable
 fun CallingPage() {
-    Surface(
+    ConstraintLayout(
         modifier =
         Modifier.fillMaxSize(),
-        color = Color.LightGray
+        constraintSet = callingPageConstraints()
     ) {
         Background()
         CallingText()

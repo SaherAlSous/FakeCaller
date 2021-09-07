@@ -14,7 +14,6 @@ fun CallingPage(navController: NavController) {
         constraintSet = callingPageConstraints()
     ) {
         Background()
-        CallingText()
         CallTimer()
         ResponseButtons(navController)
         RejectButton(navController)

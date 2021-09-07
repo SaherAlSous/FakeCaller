@@ -8,9 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.saher.fakecaller.data.contacts.Contact
 
 @Composable
-fun ProfileContent(name: String = "Contact Name", LandLine: String = "022772721",mobile: String = "0569956478", alignment: Alignment.Horizontal) {
+fun ProfileContent(contact: Contact, alignment: Alignment.Horizontal) {
     Column(
         modifier =
         Modifier
@@ -18,15 +19,15 @@ fun ProfileContent(name: String = "Contact Name", LandLine: String = "022772721"
         horizontalAlignment = alignment
     ) {
         Text(
-            text = name,
+            text = contact.name,
             style = MaterialTheme.typography.h5,
         )
         Text(
-            text = LandLine,
+            text = contact.land_line.toString(),
             style = MaterialTheme.typography.body2,
         )
         Text(
-            text = mobile,
+            text = contact.mobile.toString(),
             style = MaterialTheme.typography.body2,
         )
     }

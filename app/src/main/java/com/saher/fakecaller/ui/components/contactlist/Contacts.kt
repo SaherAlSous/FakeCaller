@@ -5,15 +5,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.saher.fakecaller.data.RoomViewModel
 
 @Composable
-fun Contacts(navController: NavController) {
+fun Contacts(roomViewModel: RoomViewModel, navController: NavController) {
     ConstraintLayout(
         modifier = Modifier.fillMaxSize(),
         constraintSet = contactListConstraints()
     ) {
         AppBar(navController)
-        ContactList(navController)
+        ContactList(roomViewModel,navController)
         AddNewContactFAB(navController)
     }
 

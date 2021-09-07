@@ -41,17 +41,4 @@ abstract class DataBase:RoomDatabase() {
             }
         }
     }
-
-
-
 }
-
-/*
-    java.lang.RuntimeException: cannot find implementation for com.saher.fakecaller.data.DataBase. DataBase_Impl does not exist
-        at androidx.room.Room.getGeneratedImplementation(Room.java:97)
-        at androidx.room.RoomDatabase$Builder.build(RoomDatabase.java:1358)
-        at com.saher.fakecaller.data.DataBase$Companion.getInstance(DataBase.kt:31)
-        at com.saher.fakecaller.data.RoomViewModel.<init>(RoomViewModel.kt:18)
-        at com.saher.fakecaller.util.RoomViewModelFactory.create(RoomViewModelFactory.kt:14)
-
- */

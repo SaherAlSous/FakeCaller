@@ -26,6 +26,7 @@ import com.saher.fakecaller.util.navigation.NavGraph
 
 
 var visible = mutableStateOf(true)
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ResponseButtons(navController: NavController) {

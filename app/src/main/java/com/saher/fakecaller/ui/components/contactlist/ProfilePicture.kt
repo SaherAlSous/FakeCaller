@@ -12,11 +12,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.saher.fakecaller.R
+import com.saher.fakecaller.data.contacts.Contact
 
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ProfilePicture(imageSize: Dp) {
+fun ProfilePicture(contact: Contact,imageSize: Dp) {
     /**
      * We wrap it in a [Card] to use its properties
      */
@@ -30,7 +34,7 @@ fun ProfilePicture(imageSize: Dp) {
         elevation = 4.dp
     ) {
         Image(
-            painter = painterResource(R.drawable.hala),
+            painter = rememberImagePainter(contact.uri),
             contentDescription = "User Image",
             modifier = Modifier.size(imageSize),
         )

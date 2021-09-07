@@ -1,10 +1,16 @@
 package com.saher.fakecaller.data
 
 import android.app.Application
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.data.ringtone.RingTone
+import androidx.compose.runtime.*
+import androidx.lifecycle.MutableLiveData
+import kotlin.reflect.KProperty
 
 class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -37,8 +43,26 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteContact(contact)
     }
 
-    fun updateUri(ringTone: RingTone){
-        repository.updateUri(ringTone)
+    fun insertUri(ringTone: RingTone){
+        repository.insertUri(ringTone)
+        println("""
+                    Ringtone Inserted:
+                    ID = ${ringTone.id},
+                    Uri= ${ringTone.uri}
+                """.trimIndent())
     }
 
+    fun updateUri(ringTone: RingTone){
+        repository.updateUri(ringTone)
+        println("""
+                    Ringtone Updated ViewModel:
+                    ID = ${ringTone.id},
+                    Uri= ${ringTone.uri}
+                """.trimIndent())
+    }
+
+    var ringTone: RingTone? by mutableStateOf(null)
+    var contactList = listOf<Contact>()
+
 }
+

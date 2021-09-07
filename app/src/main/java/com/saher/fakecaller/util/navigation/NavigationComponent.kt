@@ -19,8 +19,8 @@ fun NavigationComponent(roomViewModel: RoomViewModel, context: Context) {
 
     FakeCallerTheme {
         NavHost(navController = navController, startDestination = Destinations.home ){
-            composable(Destinations.home) { Contacts(navController)}
-            composable(Destinations.settings){ SettingsPage(navController,context)}
+            composable(Destinations.home) { Contacts(roomViewModel,navController)}
+            composable(Destinations.settings){ SettingsPage(roomViewModel,navController,context)}
             composable(Destinations.contact){ ContactPage(navController)}
             composable(Destinations.calling){CallingPage(navController)}
         }

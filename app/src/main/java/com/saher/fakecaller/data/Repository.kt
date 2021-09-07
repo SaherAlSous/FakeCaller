@@ -57,13 +57,27 @@ class Repository(
     //getting Ringtone Uri to media player
     fun getUri():LiveData<RingTone> = ringDao.getUri()
 
-    //updating Uri from setting page
-    fun updateUri(ringTone: RingTone) {
+    //Inserting Uri from setting page
+    fun insertUri(ringTone: RingTone) {
         executor.execute{
+            ioScope.launch {
+                ringDao.insertUri(ringTone)
+            }
+        }
+        println("""
+                    Ringtone Saved Repository: ID = ${ringTone.id}, Uri= ${ringTone.uri}
+                """.trimIndent())
+    }
+
+    fun updateUri(ringTone: RingTone){
+        executor.execute {
             ioScope.launch {
                 ringDao.updateUri(ringTone)
             }
         }
+        println("""
+                    Ringtone Updated Repository: ID = ${ringTone.id}, Uri= ${ringTone.uri}
+                """.trimIndent())
     }
 
 

@@ -6,11 +6,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.saher.fakecaller.data.RoomViewModel
 
 @Composable
-fun SettingsPage(navController: NavController, context: Context) {
+fun SettingsPage(roomViewModel: RoomViewModel,navController: NavController, context: Context) {
 Column(modifier = Modifier.fillMaxSize()) {
     SettingsAppBar(navController)
-    ChoosingRingTone(context)
+    ChoosingRingTone(roomViewModel,context)
     }
 }

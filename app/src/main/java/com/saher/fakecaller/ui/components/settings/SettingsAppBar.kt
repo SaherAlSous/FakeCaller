@@ -27,7 +27,7 @@ fun SettingsAppBar(navController: NavController) {
                 modifier =
                 Modifier
                     .padding(start = 15.dp)
-                    .clickable { navController.navigate(NavGraph.Destinations.home) }
+                    .clickable { navController.popBackStack() }
             )
         }
     )

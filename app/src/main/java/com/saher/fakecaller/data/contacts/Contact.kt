@@ -10,7 +10,7 @@ data class Contact(
     @PrimaryKey()
     val id: UUID = UUID.randomUUID(),
     val name: String,
-    val land_line : Int,
-    val mobile: Int,
+    val land_line : String,
+    val mobile: String,
     val uri: Uri
 )

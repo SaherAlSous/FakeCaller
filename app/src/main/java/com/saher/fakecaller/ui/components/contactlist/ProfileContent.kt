@@ -23,11 +23,11 @@ fun ProfileContent(contact: Contact, alignment: Alignment.Horizontal) {
             style = MaterialTheme.typography.h5,
         )
         Text(
-            text = contact.land_line.toString(),
+            text = contact.land_line,
             style = MaterialTheme.typography.body2,
         )
         Text(
-            text = contact.mobile.toString(),
+            text = contact.mobile,
             style = MaterialTheme.typography.body2,
         )
     }

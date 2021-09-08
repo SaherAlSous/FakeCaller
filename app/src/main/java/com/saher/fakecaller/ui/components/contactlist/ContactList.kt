@@ -13,12 +13,13 @@ import com.saher.fakecaller.util.navigation.NavGraph
 
 @Composable
 fun ContactList(roomViewModel:RoomViewModel,navController: NavController) {
-    val contacts:List<Contact> = roomViewModel.contactList
     GetContacts(roomViewModel)
+    val contacts:List<Contact> = roomViewModel.contactList
     LazyColumn(modifier = Modifier.layoutId("lazyColumn")){
         items(contacts){ contact ->
             ProfileCard(contact){
                 navController.navigate(NavGraph.Destinations.contact)
+                updateValues(contact, roomViewModel)
             }
         }
     }
@@ -30,4 +31,13 @@ private fun GetContacts(roomViewModel: RoomViewModel){
         LocalLifecycleOwner.current){
         roomViewModel.contactList = it
     }
+}
+
+fun updateValues(contact: Contact, roomViewModel: RoomViewModel) {
+    roomViewModel.contactId.value = contact.id
+    roomViewModel.nameMutableValue.value = contact.name
+    roomViewModel.landMutableValue.value = contact.land_line
+    roomViewModel.mobileMutableValue.value = contact.mobile
+    roomViewModel.photoUri.value = contact.uri.toString()
+    roomViewModel.updateContactBoolean = true
 }

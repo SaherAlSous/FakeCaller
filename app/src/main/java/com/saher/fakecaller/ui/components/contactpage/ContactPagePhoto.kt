@@ -12,11 +12,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.saher.fakecaller.data.RoomViewModel
 import rememberGetContentActivityResult
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ContactPagePhoto() {
+fun ContactPagePhoto(roomViewModel: RoomViewModel) {
     val getContent = rememberGetContentActivityResult()
     Box(
         contentAlignment = Alignment.Center,
@@ -25,16 +26,28 @@ fun ContactPagePhoto() {
             .fillMaxHeight(0.4f)
             .fillMaxWidth(1f)
     ) {
-        getContent.uri?.let {
-            Image(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .fillMaxSize(1f),
-                contentDescription = "UserImage",
-                contentScale = ContentScale.Crop,
-                painter = rememberImagePainter(data = it)
-            )
-        }
+       if (roomViewModel.photoUri.value.isBlank()){
+           getContent.uri?.let {
+               roomViewModel.photoUri.value = it.toString()
+               Image(
+                   modifier = Modifier
+                       .align(Alignment.TopCenter)
+                       .fillMaxSize(1f),
+                   contentDescription = "UserImage",
+                   contentScale = ContentScale.Crop,
+                   painter = rememberImagePainter(data = it)
+               )
+           }
+       }else{
+           Image(
+               modifier = Modifier
+                   .align(Alignment.TopCenter)
+                   .fillMaxSize(1f),
+               contentDescription = "UserImage",
+               contentScale = ContentScale.Crop,
+               painter = rememberImagePainter(data = roomViewModel.photoUri.value)
+           )
+       }
     }
     TextButton(
         onClick = { getContent.launch("image/*") },

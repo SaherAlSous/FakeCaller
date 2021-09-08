@@ -1,6 +1,7 @@
 package com.saher.fakecaller.data
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,11 +9,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.data.ringtone.RingTone
-import androidx.compose.runtime.*
-import androidx.lifecycle.MutableLiveData
-import kotlin.reflect.KProperty
+import androidx.core.net.toUri
+import java.util.*
+
+private const val TAG = "ROOMVIEWMODEL"
 
 class RoomViewModel(application: Application) : AndroidViewModel(application) {
+
+    //update or create contact
+    var updateContactBoolean by mutableStateOf(false)
 
     val readContactList : LiveData<List<Contact>>
     val readFileUri: LiveData<RingTone>
@@ -31,6 +36,57 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getContact(id)
     }
 
+    //
+    var contactId = mutableStateOf<UUID?>(null)
+
+    //Choosing photo page
+    var photoUri = mutableStateOf("")
+
+    //Contact page details
+    var nameMutableValue = mutableStateOf("")
+    var landMutableValue = mutableStateOf("")
+    var mobileMutableValue = mutableStateOf("")
+
+    fun createAndSaveContact(){
+        //creating a new contact or updating the current one.
+        if (updateContactBoolean){
+            val currentContact =
+                Contact(
+                    id = contactId.value!!,
+                    name = nameMutableValue.value,
+                    land_line = landMutableValue.value,
+                    mobile = mobileMutableValue.value,
+                    uri = photoUri.value.toUri()
+                )
+            Log.d(TAG, "contact updated $currentContact")
+            updateContact(currentContact)
+            contactId = mutableStateOf<UUID?>(null)
+            photoUri = mutableStateOf("")
+            nameMutableValue = mutableStateOf("")
+            landMutableValue = mutableStateOf("")
+            mobileMutableValue= mutableStateOf("")
+            updateContactBoolean = false
+        }else{
+            val newContact =
+                Contact(
+                    id = UUID.randomUUID(),
+                    name = nameMutableValue.value,
+                    land_line = landMutableValue.value,
+                    mobile = mobileMutableValue.value,
+                    uri = photoUri.value.toUri()
+                )
+            Log.d(TAG, "contact created $newContact")
+            addContact(newContact)
+            contactId = mutableStateOf<UUID?>(null)
+            photoUri = mutableStateOf("")
+            nameMutableValue = mutableStateOf("")
+            landMutableValue = mutableStateOf("")
+            mobileMutableValue= mutableStateOf("")
+        }
+    }
+
+
+    //adding a new contact
     fun addContact(contact: Contact){
         repository.addContact(contact)
     }
@@ -45,24 +101,18 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertUri(ringTone: RingTone){
         repository.insertUri(ringTone)
-        println("""
-                    Ringtone Inserted:
-                    ID = ${ringTone.id},
-                    Uri= ${ringTone.uri}
-                """.trimIndent())
     }
 
     fun updateUri(ringTone: RingTone){
         repository.updateUri(ringTone)
-        println("""
-                    Ringtone Updated ViewModel:
-                    ID = ${ringTone.id},
-                    Uri= ${ringTone.uri}
-                """.trimIndent())
     }
 
+    //Setting page ringTone
     var ringTone: RingTone? by mutableStateOf(null)
-    var contactList = listOf<Contact>()
+
+    //Contact list page
+    var contactList by mutableStateOf(listOf<Contact>())
+
 
 }
 

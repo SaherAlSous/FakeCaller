@@ -30,17 +30,17 @@ fun ChoosingRingTone(roomViewModel: RoomViewModel,context: Context) {
         modifier = Modifier.fillMaxSize()) {
         Column {
             if (fileUri != null && getContent.uri == null){
-                fileUri.uri.let { ringtone ->
+                fileUri.uri.let { uri ->
                     Text(
-                        text = fileNameAndSaveUri(it = ringtone,context= context,roomViewModel=roomViewModel),
+                        text =uri.getFileNameWithExtension(context)!!,
                         textAlign = TextAlign.Center,
                         fontSize = 24.sp,
                     )
                 }
             }else{
-                getContent.uri.let { ringtone ->
+                getContent.uri.let { uri ->
                     Text(
-                        text = fileNameAndSaveUri(it = ringtone,context= context,roomViewModel=roomViewModel),
+                        text = fileNameAndSaveUri(it = uri,context= context,roomViewModel=roomViewModel),
                         textAlign = TextAlign.Center,
                         fontSize = 24.sp,
                     )

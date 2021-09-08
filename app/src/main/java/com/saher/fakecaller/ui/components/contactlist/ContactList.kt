@@ -38,6 +38,6 @@ fun updateValues(contact: Contact, roomViewModel: RoomViewModel) {
     roomViewModel.nameMutableValue.value = contact.name
     roomViewModel.landMutableValue.value = contact.land_line
     roomViewModel.mobileMutableValue.value = contact.mobile
-    roomViewModel.photoUri.value = contact.uri.toString()
+    roomViewModel.photoUri.value = contact.contact_photo
     roomViewModel.updateContactBoolean = true
 }

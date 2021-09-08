@@ -1,6 +1,8 @@
 package com.saher.fakecaller.ui
 
 import android.app.Application
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.ImagePainter
+import com.google.accompanist.imageloading.ImageLoadState
 import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.util.RoomViewModelFactory
 import com.saher.fakecaller.util.navigation.NavigationComponent
@@ -26,6 +30,8 @@ open class MainActivity : ComponentActivity() {
                     )
                 Column(modifier = Modifier.fillMaxSize()) {
                     NavigationComponent(roomViewModel, context)
+
+
                 }
         }
     }

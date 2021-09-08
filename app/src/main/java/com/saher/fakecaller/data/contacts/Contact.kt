@@ -1,5 +1,6 @@
 package com.saher.fakecaller.data.contacts
 
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -12,5 +13,5 @@ data class Contact(
     val name: String,
     val land_line : String,
     val mobile: String,
-    val uri: Uri
+    val contact_photo: Bitmap
 )

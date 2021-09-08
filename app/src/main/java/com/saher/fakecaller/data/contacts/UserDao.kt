@@ -8,7 +8,7 @@ import androidx.room.*
 interface UserDao {
 
     //getting data for contact list
-    @Query("Select * From Contact")
+    @Query("Select * From Contact Order By name ASC")
     fun getAll() : LiveData<List<Contact>>
 
     //getting data for selected contact page

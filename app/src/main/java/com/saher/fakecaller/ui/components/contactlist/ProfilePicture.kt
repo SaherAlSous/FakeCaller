@@ -1,5 +1,6 @@
 package com.saher.fakecaller.ui.components.contactlist
 
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -20,10 +21,7 @@ import com.saher.fakecaller.R
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ProfilePicture(uri : Uri, imageSize: Dp) {
-    /**
-     * We wrap it in a [Card] to use its properties
-     */
+fun ProfilePicture(uri : Bitmap, imageSize: Dp) {
     Card(
         shape = CircleShape,
         border = BorderStroke(
@@ -33,10 +31,8 @@ fun ProfilePicture(uri : Uri, imageSize: Dp) {
         modifier = Modifier.padding(16.dp),
         elevation = 4.dp
     ) {
-        println("Here is the Uri= $uri")
-        val uri2:Uri = "content://com.android.providers.media.documents/document/image%3A34".toUri()
         val painter = rememberImagePainter(
-            data = uri2,
+            data = uri,
             builder = {
                 placeholder(R.drawable.yara)
             }

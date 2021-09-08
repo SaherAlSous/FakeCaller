@@ -1,5 +1,6 @@
 package com.saher.fakecaller.ui.components.contactpage
 
+import android.content.Context
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -10,14 +11,14 @@ import androidx.navigation.NavController
 import com.saher.fakecaller.data.RoomViewModel
 
 @Composable
-fun ContactPage(roomViewModel: RoomViewModel,navController: NavController) {
+fun ContactPage(context: Context,roomViewModel: RoomViewModel,navController: NavController) {
     Surface(color = Color.LightGray) {
         ConstraintLayout(
             modifier = Modifier.fillMaxSize(),
             constraintSet = contactPageConstraints()
         ) {
             ContactPageBar(roomViewModel,navController)
-            ContactPagePhoto(roomViewModel)
+            ContactPagePhoto(context,roomViewModel)
             ContactDetails(roomViewModel,navController)
             CallContact(navController)
         }

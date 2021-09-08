@@ -64,9 +64,6 @@ class Repository(
                 ringDao.insertUri(ringTone)
             }
         }
-        println("""
-                    Ringtone Saved Repository: ID = ${ringTone.id}, Uri= ${ringTone.uri}
-                """.trimIndent())
     }
 
     fun updateUri(ringTone: RingTone){
@@ -75,9 +72,6 @@ class Repository(
                 ringDao.updateUri(ringTone)
             }
         }
-        println("""
-                    Ringtone Updated Repository: ID = ${ringTone.id}, Uri= ${ringTone.uri}
-                """.trimIndent())
     }
 
 

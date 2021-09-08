@@ -28,7 +28,7 @@ fun ProfileCard(contact: Contact,clickAction:() -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
-           ProfilePicture(contact.uri, 72.dp)
+           ProfilePicture(contact.contact_photo, 72.dp)
            ProfileContent(contact,alignment =  Alignment.Start)
         }
     }

@@ -38,8 +38,8 @@ fun ContactPageBar(roomViewModel: RoomViewModel,navController: NavController) {
 
 fun getBackAndUpdateValue(roomViewModel: RoomViewModel, navController: NavController) {
     navController.popBackStack()
-    roomViewModel.contactId = mutableStateOf<UUID?>(null)
-    roomViewModel.photoUri = mutableStateOf("")
+    roomViewModel.contactId = mutableStateOf(null)
+    roomViewModel.photoUri = mutableStateOf(null)
     roomViewModel.nameMutableValue = mutableStateOf("")
     roomViewModel.landMutableValue = mutableStateOf("")
     roomViewModel.mobileMutableValue= mutableStateOf("")

@@ -1,6 +1,7 @@
 package com.saher.fakecaller.data
 
 import android.app.Application
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,7 +10,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.data.ringtone.RingTone
-import androidx.core.net.toUri
 import java.util.*
 
 private const val TAG = "ROOMVIEWMODEL"
@@ -40,7 +40,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     var contactId = mutableStateOf<UUID?>(null)
 
     //Choosing photo page
-    var photoUri = mutableStateOf("")
+    var photoUri = mutableStateOf<Bitmap?>(null)
 
     //Contact page details
     var nameMutableValue = mutableStateOf("")
@@ -56,12 +56,12 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
                     name = nameMutableValue.value,
                     land_line = landMutableValue.value,
                     mobile = mobileMutableValue.value,
-                    uri = photoUri.value.toUri()
+                    contact_photo = photoUri.value!!
                 )
             Log.d(TAG, "contact updated $currentContact")
             updateContact(currentContact)
-            contactId = mutableStateOf<UUID?>(null)
-            photoUri = mutableStateOf("")
+            contactId = mutableStateOf(null)
+            photoUri = mutableStateOf(null)
             nameMutableValue = mutableStateOf("")
             landMutableValue = mutableStateOf("")
             mobileMutableValue= mutableStateOf("")
@@ -73,12 +73,12 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
                     name = nameMutableValue.value,
                     land_line = landMutableValue.value,
                     mobile = mobileMutableValue.value,
-                    uri = photoUri.value.toUri()
+                    contact_photo = photoUri.value!!
                 )
             Log.d(TAG, "contact created $newContact")
             addContact(newContact)
-            contactId = mutableStateOf<UUID?>(null)
-            photoUri = mutableStateOf("")
+            contactId = mutableStateOf(null)
+            photoUri = mutableStateOf(null)
             nameMutableValue = mutableStateOf("")
             landMutableValue = mutableStateOf("")
             mobileMutableValue= mutableStateOf("")
@@ -87,11 +87,11 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
 
     //adding a new contact
-    fun addContact(contact: Contact){
+    private fun addContact(contact: Contact){
         repository.addContact(contact)
     }
 
-    fun updateContact(contact: Contact){
+    private fun updateContact(contact: Contact){
         repository.updateContact(contact)
     }
 

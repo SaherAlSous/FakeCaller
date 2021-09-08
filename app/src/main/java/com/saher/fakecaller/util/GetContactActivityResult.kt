@@ -20,7 +20,8 @@ fun rememberGetContentActivityResult(): GetContentActivityResult {
     var uri by rememberSaveable { mutableStateOf<Uri?>(null) }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent(), onResult = {
         uri = it
-    })
+    }
+    )
     return remember(launcher, uri) {
         GetContentActivityResult(launcher, uri)
     }

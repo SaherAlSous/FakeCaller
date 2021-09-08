@@ -24,6 +24,7 @@ suspend fun convertToBitmap(uri: Uri, context: Context, widthPixels: Int, height
 suspend fun getDrawable(uri: Uri, context: Context): Drawable? {
     val imageLoader = ImageLoader.Builder(context)
         .availableMemoryPercentage(0.25)
+        .allowHardware(false)
         .crossfade(true)
         .build()
 

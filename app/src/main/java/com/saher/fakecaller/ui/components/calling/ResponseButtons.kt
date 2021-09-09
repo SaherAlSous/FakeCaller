@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.R
+import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.util.Chronometer
 import com.saher.fakecaller.util.navigation.NavGraph
 
@@ -29,7 +30,7 @@ var visible = mutableStateOf(true)
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun ResponseButtons(navController: NavController) {
+fun ResponseButtons(roomViewModel: RoomViewModel,navController: NavController) {
     AnimatedVisibility(
         visible = visible.value,
         modifier = Modifier
@@ -52,7 +53,7 @@ fun ResponseButtons(navController: NavController) {
                 modifier = Modifier
                     .border(2.dp, Color.White, CircleShape)
                     .padding(24.dp)
-                    .clickable { rejectCall(navController) }
+                    .clickable { rejectCall(roomViewModel,navController) }
             )
             Image(
                 painter = painterResource(
@@ -62,7 +63,7 @@ fun ResponseButtons(navController: NavController) {
                 modifier = Modifier
                     .border(2.dp, Color.White, CircleShape)
                     .padding(24.dp)
-                    .clickable { acceptCall() }
+                    .clickable { acceptCall(roomViewModel) }
             )
         }
     }
@@ -93,12 +94,12 @@ fun RejectButton(navController: NavController) {
     }
 }
 
-private fun acceptCall(){
-    Chronometer().timerController(true)
+private fun acceptCall(roomViewModel: RoomViewModel){
+    Chronometer(roomViewModel).timerController(true)
     visible.value = false
 }
 
-private fun rejectCall(navController: NavController) {
+private fun rejectCall(roomViewModel: RoomViewModel, navController: NavController) {
     navController.popBackStack()
-    Chronometer().timerController(false)
+    Chronometer(roomViewModel).timerController(false)
 }

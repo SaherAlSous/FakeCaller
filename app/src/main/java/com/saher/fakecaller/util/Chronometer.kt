@@ -1,9 +1,6 @@
 package com.saher.fakecaller.util
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.MutableLiveData
+import com.saher.fakecaller.data.RoomViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -13,11 +10,11 @@ import java.util.*
 import kotlin.math.roundToInt
 
 
-class Chronometer {
+class Chronometer(roomViewModel: RoomViewModel) {
     private var timer: Timer = Timer()
-    var time = 0.0
-    var timerTask: TimerTask? = null
-    var timerText = ""
+    var time = roomViewModel.time
+    var timerTask = roomViewModel.timerTask
+    var timerText = roomViewModel.timerText
 
 
     fun timerController(status:Boolean){

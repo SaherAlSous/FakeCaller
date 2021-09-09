@@ -5,17 +5,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.saher.fakecaller.data.RoomViewModel
+import java.util.*
 
 @Composable
-fun CallingPage(navController: NavController) {
+fun CallingPage(roomViewModel:RoomViewModel ,navController: NavController) {
     ConstraintLayout(
         modifier =
         Modifier.fillMaxSize(),
         constraintSet = callingPageConstraints()
     ) {
-        Background()
-        CallTimer()
-        ResponseButtons(navController)
+        Background(roomViewModel)
+        CallTimer(roomViewModel)
+        ResponseButtons(roomViewModel,navController)
         RejectButton(navController)
     }
 }

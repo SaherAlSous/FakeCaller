@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.data.ringtone.RingTone
+import com.saher.fakecaller.util.Chronometer
 import java.util.*
 
 private const val TAG = "ROOMVIEWMODEL"
@@ -60,12 +61,8 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
                 )
             Log.d(TAG, "contact updated $currentContact")
             updateContact(currentContact)
-            contactId = mutableStateOf(null)
-            photoUri = mutableStateOf(null)
-            nameMutableValue = mutableStateOf("")
-            landMutableValue = mutableStateOf("")
-            mobileMutableValue= mutableStateOf("")
             updateContactBoolean = false
+            eraseData()
         }else{
             val newContact =
                 Contact(
@@ -77,11 +74,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
                 )
             Log.d(TAG, "contact created $newContact")
             addContact(newContact)
-            contactId = mutableStateOf(null)
-            photoUri = mutableStateOf(null)
-            nameMutableValue = mutableStateOf("")
-            landMutableValue = mutableStateOf("")
-            mobileMutableValue= mutableStateOf("")
+            eraseData()
         }
     }
 
@@ -112,6 +105,26 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
     //Contact list page
     var contactList by mutableStateOf(listOf<Contact>())
+
+
+    private fun eraseData() {
+        contactId = mutableStateOf(null)
+        photoUri = mutableStateOf(null)
+        nameMutableValue = mutableStateOf("")
+        landMutableValue = mutableStateOf("")
+        mobileMutableValue= mutableStateOf("")
+
+    }
+
+
+    //Chronometer
+    var timerTask: TimerTask? = null
+
+    var time by mutableStateOf(0.0)
+
+    var timerText by mutableStateOf("")
+
+    var updatedTime by mutableStateOf(Chronometer(this).updateTime())
 
 
 }

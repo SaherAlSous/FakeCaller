@@ -18,7 +18,7 @@ import com.saher.fakecaller.data.RoomViewModel
 import java.util.*
 
 @Composable
-fun ContactPageBar(roomViewModel: RoomViewModel,navController: NavController) {
+fun ContactPageBar(roomViewModel: RoomViewModel,navController: NavController,onBack:()-> Unit) {
     TopAppBar(
         title = { Text(text = "Contact") },
         backgroundColor = Color.LightGray,
@@ -30,13 +30,14 @@ fun ContactPageBar(roomViewModel: RoomViewModel,navController: NavController) {
                 modifier =
                 Modifier
                     .padding(start = 15.dp)
-                    .clickable { getBackAndUpdateValue(roomViewModel,navController) }
+                    .clickable { getBackAndUpdateValue(roomViewModel,navController,onBack) }
             )
         }
     )
 }
 
-fun getBackAndUpdateValue(roomViewModel: RoomViewModel, navController: NavController) {
+fun getBackAndUpdateValue(roomViewModel: RoomViewModel, navController: NavController,onBack:()-> Unit) {
+    onBack.invoke()
     navController.popBackStack()
     roomViewModel.contactId = mutableStateOf(null)
     roomViewModel.photoUri = mutableStateOf(null)

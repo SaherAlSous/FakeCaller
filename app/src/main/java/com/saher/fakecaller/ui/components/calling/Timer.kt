@@ -14,7 +14,7 @@ fun CallTimer(roomViewModel: RoomViewModel) {
 
     //Timer is not updating
     Text(
-        text =  if ((roomViewModel.updatedTime).isBlank()) "00:00:00" else roomViewModel.updatedTime ,
+        text = roomViewModel.timerText,
         modifier = Modifier.layoutId("timer"),
         fontSize = 24.sp,
         color = Color.White,

@@ -41,7 +41,7 @@ fun ContactPagePhoto(context: Context,roomViewModel: RoomViewModel) {
        if (roomViewModel.photoUri.value == null){
            getContent.uri?.let {
                CoroutineScope(IO).launch {
-                   roomViewModel.photoUri.value = convertToBitmap(uri = it,context = context, 50,50)
+                   roomViewModel.photoUri.value = convertToBitmap(uri = it,context = context, 450,450)
                }
                Image(
                    modifier = Modifier

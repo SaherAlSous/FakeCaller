@@ -118,14 +118,9 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
 
     //Chronometer
-    var timerTask: TimerTask? = null
-
-    var time by mutableStateOf(0.0)
-
-    var timerText by mutableStateOf("")
-
-    var updatedTime by mutableStateOf(Chronometer(this).updateTime())
-
+    var timerText by mutableStateOf(Chronometer().updateTime())
+    fun startTimer() = Chronometer().timerController(true)
+    fun endTimer() = Chronometer().timerController(false)
 
 }
 

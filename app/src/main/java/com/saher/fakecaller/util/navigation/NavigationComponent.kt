@@ -24,8 +24,8 @@ fun NavigationComponent(roomViewModel: RoomViewModel, context: Context) {
         NavHost(navController = navController, startDestination = Destinations.home ){
             composable(Destinations.home) { Contacts(roomViewModel,navController)}
             composable(Destinations.settings){ SettingsPage(roomViewModel,navController,context)}
-            composable(Destinations.contact){ ContactPage(context,roomViewModel,navController)}
-            composable(Destinations.calling){CallingPage(roomViewModel,navController)}
+            composable(Destinations.contact){ ContactPage(context,roomViewModel,navController){} }
+            composable(Destinations.calling){CallingPage(context,roomViewModel,navController)}
 
         }
     }

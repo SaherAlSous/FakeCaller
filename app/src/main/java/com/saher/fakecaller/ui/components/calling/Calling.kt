@@ -1,5 +1,6 @@
 package com.saher.fakecaller.ui.components.calling
 
+import android.content.Context
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -9,7 +10,7 @@ import com.saher.fakecaller.data.RoomViewModel
 import java.util.*
 
 @Composable
-fun CallingPage(roomViewModel:RoomViewModel ,navController: NavController) {
+fun CallingPage(context: Context,roomViewModel:RoomViewModel ,navController: NavController) {
     ConstraintLayout(
         modifier =
         Modifier.fillMaxSize(),
@@ -17,7 +18,7 @@ fun CallingPage(roomViewModel:RoomViewModel ,navController: NavController) {
     ) {
         Background(roomViewModel)
         CallTimer(roomViewModel)
-        ResponseButtons(roomViewModel,navController)
-        RejectButton(navController)
+        ResponseButtons(context,roomViewModel,navController)
+        RejectButton(context,navController, roomViewModel)
     }
 }

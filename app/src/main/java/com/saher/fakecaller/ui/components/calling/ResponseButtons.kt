@@ -1,5 +1,6 @@
 package com.saher.fakecaller.ui.components.calling
 
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -17,20 +18,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.R
 import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.util.Chronometer
-import com.saher.fakecaller.util.navigation.NavGraph
+import com.saher.fakecaller.util.StartRingTone
 
 
 var visible = mutableStateOf(true)
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun ResponseButtons(roomViewModel: RoomViewModel,navController: NavController) {
+fun ResponseButtons(context: Context,roomViewModel: RoomViewModel,navController: NavController) {
     AnimatedVisibility(
         visible = visible.value,
         modifier = Modifier
@@ -53,7 +53,7 @@ fun ResponseButtons(roomViewModel: RoomViewModel,navController: NavController) {
                 modifier = Modifier
                     .border(2.dp, Color.White, CircleShape)
                     .padding(24.dp)
-                    .clickable { rejectCall(roomViewModel,navController) }
+                    .clickable { rejectCall(context,roomViewModel ,navController) }
             )
             Image(
                 painter = painterResource(
@@ -63,7 +63,7 @@ fun ResponseButtons(roomViewModel: RoomViewModel,navController: NavController) {
                 modifier = Modifier
                     .border(2.dp, Color.White, CircleShape)
                     .padding(24.dp)
-                    .clickable { acceptCall(roomViewModel) }
+                    .clickable { acceptCall(context,roomViewModel) }
             )
         }
     }
@@ -72,7 +72,7 @@ fun ResponseButtons(roomViewModel: RoomViewModel,navController: NavController) {
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun RejectButton(navController: NavController) {
+fun RejectButton(context: Context,navController: NavController, roomViewModel: RoomViewModel) {
     AnimatedVisibility(
         visible = !visible.value,
         modifier = Modifier.layoutId("endCall")
@@ -88,18 +88,28 @@ fun RejectButton(navController: NavController) {
                 modifier = Modifier
                     .border(2.dp, Color.White, CircleShape)
                     .padding(24.dp)
-                    .clickable { navController.popBackStack() }
+                    .clickable { endCall(context, navController, roomViewModel ) }
             )
         }
     }
 }
 
-private fun acceptCall(roomViewModel: RoomViewModel){
-    Chronometer(roomViewModel).timerController(true)
-    visible.value = false
+fun endCall(context: Context, navController: NavController, roomViewModel: RoomViewModel) {
+    val startRingTone = StartRingTone(context)
+    startRingTone.startStopRingtone()
+    navController.popBackStack()
+    roomViewModel.endTimer()
 }
 
-private fun rejectCall(roomViewModel: RoomViewModel, navController: NavController) {
+private fun acceptCall(context: Context, roomViewModel: RoomViewModel){
+    val startRingTone = StartRingTone(context)
+    startRingTone.startStopRingtone()
+    roomViewModel.startTimer()
+    visible.value = false
+}
+private fun rejectCall(context: Context, roomViewModel: RoomViewModel, navController: NavController) {
+    val startRingTone = StartRingTone(context)
+    startRingTone.startStopRingtone()
     navController.popBackStack()
-    Chronometer(roomViewModel).timerController(false)
+    roomViewModel.endTimer()
 }

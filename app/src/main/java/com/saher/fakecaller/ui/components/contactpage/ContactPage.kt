@@ -22,7 +22,7 @@ fun ContactPage(context: Context,roomViewModel: RoomViewModel,navController: Nav
             ContactPageBar(roomViewModel,navController,onBack)
             ContactPagePhoto(context,roomViewModel)
             ContactDetails(roomViewModel,navController)
-            CallContact(context,navController)
+            CallContact(roomViewModel,navController)
         }
     }
 }

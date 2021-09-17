@@ -1,6 +1,5 @@
 package com.saher.fakecaller.ui.components.calling
 
-import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -22,17 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.R
 import com.saher.fakecaller.data.RoomViewModel
-import com.saher.fakecaller.util.Chronometer
-import com.saher.fakecaller.util.StartRingTone
 
-
-var visible = mutableStateOf(true)
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun ResponseButtons(context: Context,roomViewModel: RoomViewModel,navController: NavController) {
+fun ResponseButtons(roomViewModel: RoomViewModel, navController: NavController) {
     AnimatedVisibility(
-        visible = visible.value,
+        visible = roomViewModel.visible.value,
         modifier = Modifier
             .layoutId("answeringButtons"),
         exit = fadeOut(
@@ -53,7 +48,7 @@ fun ResponseButtons(context: Context,roomViewModel: RoomViewModel,navController:
                 modifier = Modifier
                     .border(2.dp, Color.White, CircleShape)
                     .padding(24.dp)
-                    .clickable { rejectCall(context,roomViewModel ,navController) }
+                    .clickable { rejectCall(roomViewModel, navController) }
             )
             Image(
                 painter = painterResource(
@@ -63,7 +58,7 @@ fun ResponseButtons(context: Context,roomViewModel: RoomViewModel,navController:
                 modifier = Modifier
                     .border(2.dp, Color.White, CircleShape)
                     .padding(24.dp)
-                    .clickable { acceptCall(context,roomViewModel) }
+                    .clickable { acceptCall(roomViewModel) }
             )
         }
     }
@@ -72,9 +67,9 @@ fun ResponseButtons(context: Context,roomViewModel: RoomViewModel,navController:
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun RejectButton(context: Context,navController: NavController, roomViewModel: RoomViewModel) {
+fun RejectButton(navController: NavController, roomViewModel: RoomViewModel) {
     AnimatedVisibility(
-        visible = !visible.value,
+        visible = !roomViewModel.visible.value,
         modifier = Modifier.layoutId("endCall")
     ) {
         Row(
@@ -88,28 +83,31 @@ fun RejectButton(context: Context,navController: NavController, roomViewModel: R
                 modifier = Modifier
                     .border(2.dp, Color.White, CircleShape)
                     .padding(24.dp)
-                    .clickable { endCall(context, navController, roomViewModel ) }
+                    .clickable { endCall(navController, roomViewModel) }
             )
         }
     }
 }
 
-fun endCall(context: Context, navController: NavController, roomViewModel: RoomViewModel) {
-    val startRingTone = StartRingTone(context)
-    startRingTone.startStopRingtone()
+
+fun endCall(
+    navController: NavController,
+    roomViewModel: RoomViewModel
+) {
     navController.popBackStack()
     roomViewModel.endTimer()
 }
 
-private fun acceptCall(context: Context, roomViewModel: RoomViewModel){
-    val startRingTone = StartRingTone(context)
-    startRingTone.startStopRingtone()
+private fun acceptCall(roomViewModel: RoomViewModel) {
+    roomViewModel.stopRingtone()
     roomViewModel.startTimer()
-    visible.value = false
+    roomViewModel.visible.value = false
 }
-private fun rejectCall(context: Context, roomViewModel: RoomViewModel, navController: NavController) {
-    val startRingTone = StartRingTone(context)
-    startRingTone.startStopRingtone()
+
+private fun rejectCall(
+    roomViewModel: RoomViewModel,
+    navController: NavController
+) {
+    roomViewModel.stopRingtone()
     navController.popBackStack()
-    roomViewModel.endTimer()
 }

@@ -2,15 +2,17 @@ package com.saher.fakecaller.data
 
 import android.app.Application
 import android.graphics.Bitmap
+import android.media.MediaPlayer
+import android.media.RingtoneManager
+import android.net.Uri
 import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.data.ringtone.RingTone
 import com.saher.fakecaller.util.Chronometer
+import com.saher.fakecaller.util.StartRingTone
 import java.util.*
 
 private const val TAG = "ROOMVIEWMODEL"
@@ -118,9 +120,28 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
 
     //Chronometer
-    var timerText by mutableStateOf(Chronometer().updateTime())
-    fun startTimer() = Chronometer().timerController(true)
-    fun endTimer() = Chronometer().timerController(false)
+    val chronos = Chronometer()
+    var timerText = chronos.chronometerTimerText
+    fun startTimer() = chronos.timerController(true)
+    fun endTimer() = chronos.timerController(false)
+
+
+    //media player
+    val startRingTone = StartRingTone()
+    val uri: Uri = RingtoneManager.getActualDefaultRingtoneUri(application, RingtoneManager.TYPE_RINGTONE)
+    var mPlayer: MediaPlayer? = null
+
+    fun startRingtone() {
+        mPlayer = MediaPlayer.create(this.getApplication(), uri)
+        startRingTone.startStopRingtone(mPlayer,true)
+    }
+
+    fun stopRingtone() {
+        startRingTone.startStopRingtone(mPlayer,false)
+    }
+
+    //buttons visibility
+    var visible = mutableStateOf(true)
 
 }
 

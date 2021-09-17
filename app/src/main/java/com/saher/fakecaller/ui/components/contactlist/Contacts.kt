@@ -15,8 +15,6 @@ fun Contacts(roomViewModel: RoomViewModel, navController: NavController) {
     ) {
         AppBar(navController)
         ContactList(roomViewModel,navController)
-        AddNewContactFAB(navController)
+        AddNewContactFAB(roomViewModel,navController)
     }
-
 }
-

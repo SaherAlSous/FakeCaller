@@ -14,11 +14,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.R
+import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.util.StartRingTone
 import com.saher.fakecaller.util.navigation.NavGraph
 
 @Composable
-fun CallContact(context: Context,navController: NavController) {
+fun CallContact(roomViewModel: RoomViewModel,navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -26,7 +27,7 @@ fun CallContact(context: Context,navController: NavController) {
         horizontalArrangement = Arrangement.End
     ) {
         IconButton(
-            onClick = { startCaller(context,navController) },
+            onClick = { startCaller(roomViewModel,navController) },
             modifier = Modifier.padding(end = 12.dp)
         ) {
             Image(
@@ -36,8 +37,8 @@ fun CallContact(context: Context,navController: NavController) {
     }
 }
 
-fun startCaller(context:Context,navController: NavController) {
-    val startRingTone = StartRingTone(context)
-    startRingTone.startStopRingtone()
+fun startCaller(roomViewModel: RoomViewModel,navController: NavController) {
+    roomViewModel.startRingtone()
     navController.navigate(NavGraph.Destinations.calling)
+    roomViewModel.visible.value = true
 }

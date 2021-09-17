@@ -11,7 +11,6 @@ import com.saher.fakecaller.util.Chronometer
 
 @Composable
 fun CallTimer(roomViewModel: RoomViewModel) {
-
     //Timer is not updating
     Text(
         text = roomViewModel.timerText,

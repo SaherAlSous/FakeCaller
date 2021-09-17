@@ -3,9 +3,12 @@ package com.saher.fakecaller.util
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -15,15 +18,17 @@ class Chronometer {
     private var timer: Timer = Timer()
     var time = 0.0
     private var timerTask: TimerTask? = null
-    var chronometerTimerText by mutableStateOf("00:000:00")
+    var chronometerTimerText = MutableLiveData("")
 
     fun timerController(status:Boolean){
         if (status) {
             timerTask =  object : TimerTask() {
                 override fun run() {
-                    CoroutineScope(Main).launch {
+                    CoroutineScope(IO).launch {
                         time++
-                        chronometerTimerText = getTimerText()
+                        withContext(Main){
+                            chronometerTimerText.value = getTimerText()
+                        }
                         updateTime()
                     }
                 }
@@ -47,7 +52,7 @@ class Chronometer {
         return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds)
     }
 
-    fun updateTime(time:String=chronometerTimerText):String{
+    fun updateTime(time:String=chronometerTimerText.value!!):String{
         println(time)
         return time
     }

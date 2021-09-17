@@ -122,6 +122,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     //Chronometer
     val chronos = Chronometer()
     var timerText = chronos.chronometerTimerText
+    var displayedTimer by mutableStateOf("")
     fun startTimer() = chronos.timerController(true)
     fun endTimer() = chronos.timerController(false)
 

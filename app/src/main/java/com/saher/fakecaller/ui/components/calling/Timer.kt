@@ -13,10 +13,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Observer
 import com.saher.fakecaller.data.RoomViewModel
 
-var text by mutableStateOf("")
-
 @Composable
 fun CallTimer(roomViewModel: RoomViewModel) {
+    val text = roomViewModel.displayedTimer
      ObserverTimer(roomViewModel)
     //Timer is not updating
     Text(
@@ -32,7 +31,6 @@ fun ObserverTimer(roomViewModel: RoomViewModel) {
 roomViewModel.timerText.observe(
     LocalLifecycleOwner.current,
     Observer {
-      text =  it
-    }
-)
+        roomViewModel.displayedTimer =  it
+    })
 }

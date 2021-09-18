@@ -17,7 +17,7 @@ fun ContactList(roomViewModel:RoomViewModel,navController: NavController) {
     val contacts:List<Contact> = roomViewModel.contactList
     LazyColumn(modifier = Modifier.layoutId("lazyColumn")){
         items(contacts){ contact ->
-            ProfileCard(contact){
+            ProfileCard(roomViewModel,contact){
                 navController.navigate(NavGraph.Destinations.contact)
                 updateValues(contact, roomViewModel)
             }

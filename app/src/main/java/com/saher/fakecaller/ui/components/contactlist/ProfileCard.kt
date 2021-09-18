@@ -8,10 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.data.contacts.Contact
 
 @Composable
-fun ProfileCard(contact: Contact,clickAction:() -> Unit) {
+fun ProfileCard(roomViewModel: RoomViewModel,contact: Contact,clickAction:() -> Unit) {
     Card( //We changed the default shape of Card to make a cut in the corner.
         modifier = Modifier
             .padding(top = 8.dp, bottom = 4.dp, start = 16.dp, end = 16.dp)
@@ -29,7 +30,7 @@ fun ProfileCard(contact: Contact,clickAction:() -> Unit) {
             horizontalArrangement = Arrangement.Start
         ) {
            ProfilePicture(contact.contact_photo, 72.dp)
-           ProfileContent(contact,alignment =  Alignment.Start)
+           ProfileContent(roomViewModel, contact,alignment =  Alignment.Start)
         }
     }
 }

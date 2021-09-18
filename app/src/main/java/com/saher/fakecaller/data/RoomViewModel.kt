@@ -86,18 +86,22 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
         repository.addContact(contact)
     }
 
+    //updating the current contact
     private fun updateContact(contact: Contact){
         repository.updateContact(contact)
     }
 
+    //deleting existing contact
     fun deleteContact(contact: Contact){
         repository.deleteContact(contact)
     }
 
+    //add new Uri
     fun insertUri(ringTone: RingTone){
         repository.insertUri(ringTone)
     }
 
+    //update existing Uri
     fun updateUri(ringTone: RingTone){
         repository.updateUri(ringTone)
     }
@@ -108,7 +112,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     //Contact list page
     var contactList by mutableStateOf(listOf<Contact>())
 
-
+    //Erase data values here.
     private fun eraseData() {
         contactId = mutableStateOf(null)
         photoUri = mutableStateOf(null)
@@ -120,7 +124,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
 
     //Chronometer
-    val chronos = Chronometer()
+    private val chronos = Chronometer()
     var timerText = chronos.chronometerTimerText
     var displayedTimer by mutableStateOf("")
     fun startTimer() = chronos.timerController(true)
@@ -128,7 +132,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
 
     //media player
-    val startRingTone = StartRingTone()
+    private val startRingTone = StartRingTone()
     val uri: Uri = RingtoneManager.getActualDefaultRingtoneUri(application, RingtoneManager.TYPE_RINGTONE)
     var mPlayer: MediaPlayer? = null
 

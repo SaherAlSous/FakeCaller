@@ -13,33 +13,44 @@ import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.data.ringtone.RingTone
 import com.saher.fakecaller.util.Chronometer
 import com.saher.fakecaller.util.StartRingTone
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
+import javax.inject.Inject
 
 private const val TAG = "ROOMVIEWMODEL"
 
-class RoomViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class RoomViewModel @Inject constructor(
+    application: Application,
+    private val startRingTone: StartRingTone,
+    private val chronos: Chronometer
 
-    //update or create contact
-    var updateContactBoolean by mutableStateOf(false)
+) : AndroidViewModel(application) {
 
+    //Reading Room
     val readContactList : LiveData<List<Contact>>
     val readFileUri: LiveData<RingTone>
     private val repository : Repository
 
-    init {
-        val dbInstance = DataBase.getInstance(application)
-        val userDao = dbInstance.UserDao()
-        val ringDao = dbInstance.RingDao()
-        repository = Repository(userDao, ringDao)
-        readContactList = repository.getContacts
-        readFileUri = repository.getUri()
-    }
+    //update or create contact
+    var updateContactBoolean by mutableStateOf(false)
 
-    suspend fun getContact(id:Long): LiveData<Contact>{
-        return repository.getContact(id)
-    }
+    //ChronoMeter
+    var timerText = chronos.chronometerTimerText
+    var displayedTimer by mutableStateOf("")
 
-    //
+    //media player
+    val uri: Uri = RingtoneManager.getActualDefaultRingtoneUri(application, RingtoneManager.TYPE_RINGTONE)
+    var mPlayer: MediaPlayer? = null
+
+    //buttons visibility
+    var visible = mutableStateOf(true)
+
+    //Contact Id
     var contactId = mutableStateOf<UUID?>(null)
 
     //Choosing photo page
@@ -49,6 +60,21 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     var nameMutableValue = mutableStateOf("")
     var landMutableValue = mutableStateOf("")
     var mobileMutableValue = mutableStateOf("")
+
+    init {
+        //Initialize Room & get initial data
+        val dbInstance = DataBase.getInstance(application)
+        val userDao = dbInstance.UserDao()
+        val ringDao = dbInstance.RingDao()
+        repository = Repository(userDao, ringDao)
+        readContactList = repository.getContacts
+        readFileUri = repository.getUri()
+    }
+
+    //I passed the contact through the constructor.
+    suspend fun getContact(id:Long): LiveData<Contact>{
+        return repository.getContact(id)
+    }
 
     fun createAndSaveContact(){
         //creating a new contact or updating the current one.
@@ -122,20 +148,11 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-
-    //Chronometer
-    private val chronos = Chronometer()
-    var timerText = chronos.chronometerTimerText
-    var displayedTimer by mutableStateOf("")
+   //ChronoMeter
     fun startTimer() = chronos.timerController(true)
     fun endTimer() = chronos.timerController(false)
 
-
-    //media player
-    private val startRingTone = StartRingTone()
-    val uri: Uri = RingtoneManager.getActualDefaultRingtoneUri(application, RingtoneManager.TYPE_RINGTONE)
-    var mPlayer: MediaPlayer? = null
-
+    //Media Player
     fun startRingtone() {
         mPlayer = MediaPlayer.create(this.getApplication(), uri)
         startRingTone.startStopRingtone(mPlayer,true)
@@ -144,9 +161,5 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     fun stopRingtone() {
         startRingTone.startStopRingtone(mPlayer,false)
     }
-
-    //buttons visibility
-    var visible = mutableStateOf(true)
-
 }
 

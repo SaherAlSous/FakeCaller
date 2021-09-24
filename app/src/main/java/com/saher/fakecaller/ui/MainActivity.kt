@@ -19,18 +19,19 @@ import com.google.accompanist.imageloading.ImageLoadState
 import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.util.RoomViewModelFactory
 import com.saher.fakecaller.util.navigation.NavigationComponent
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 open class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-                    val context = applicationContext
-                    val roomViewModel: RoomViewModel = viewModel(
-                        factory = RoomViewModelFactory(context as Application)
-                    )
-                Column(modifier = Modifier.fillMaxSize()) {
+            val context = applicationContext
+            val roomViewModel: RoomViewModel = viewModel()
+            Column(modifier = Modifier.fillMaxSize()) {
                     NavigationComponent(roomViewModel, context)
-
 
                 }
         }

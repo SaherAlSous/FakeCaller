@@ -4,20 +4,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
 
-
-class Chronometer {
-    private var timer: Timer = Timer()
+@ViewModelScoped
+open class Chronometer @Inject constructor() {
+    var timer: Timer = Timer()
     var time = 0.0
-    private var timerTask: TimerTask? = null
+    var timerTask: TimerTask? = null
     var chronometerTimerText = MutableLiveData("")
 
     fun timerController(status:Boolean){
@@ -29,7 +31,6 @@ class Chronometer {
                         withContext(Main){
                             chronometerTimerText.value = getTimerText()
                         }
-                        updateTime()
                     }
                 }
             }
@@ -50,10 +51,5 @@ class Chronometer {
 
     private fun formatTime(seconds: Int, minutes: Int, hours: Int): String {
         return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds)
-    }
-
-    fun updateTime(time:String=chronometerTimerText.value!!):String{
-        println(time)
-        return time
     }
 }

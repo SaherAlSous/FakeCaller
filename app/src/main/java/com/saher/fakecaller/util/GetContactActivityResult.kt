@@ -7,7 +7,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 
 
 class GetContentActivityResult(
-    private val launcher: ManagedActivityResultLauncher<String, Uri>,
+    private val launcher: ManagedActivityResultLauncher<String, Uri?>,
     val uri: Uri?
 ) {
     fun launch(mimeType: String) {

@@ -2,6 +2,7 @@ package com.saher.fakecaller.data.contacts
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import dagger.hilt.android.scopes.ViewModelScoped
 
 
 @Dao

@@ -6,6 +6,7 @@ import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.data.contacts.UserDao
 import com.saher.fakecaller.data.ringtone.RingDao
 import com.saher.fakecaller.data.ringtone.RingTone
+import dagger.hilt.android.scopes.ViewModelScoped
 
 
 private const val DATABASE_NAME = "FakeCaller"

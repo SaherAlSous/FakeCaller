@@ -13,10 +13,6 @@ import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.data.ringtone.RingTone
 import com.saher.fakecaller.util.Chronometer
 import com.saher.fakecaller.util.StartRingTone
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -27,14 +23,14 @@ private const val TAG = "ROOMVIEWMODEL"
 class RoomViewModel @Inject constructor(
     application: Application,
     private val startRingTone: StartRingTone,
-    private val chronos: Chronometer
+    private val chronos: Chronometer,
+    private val repository : Repository
 
 ) : AndroidViewModel(application) {
 
     //Reading Room
     val readContactList : LiveData<List<Contact>>
     val readFileUri: LiveData<RingTone>
-    private val repository : Repository
 
     //update or create contact
     var updateContactBoolean by mutableStateOf(false)
@@ -44,7 +40,7 @@ class RoomViewModel @Inject constructor(
     var displayedTimer by mutableStateOf("")
 
     //media player
-    val uri: Uri = RingtoneManager.getActualDefaultRingtoneUri(application, RingtoneManager.TYPE_RINGTONE)
+    val uri: Uri? = RingtoneManager.getActualDefaultRingtoneUri(application, RingtoneManager.TYPE_RINGTONE)
     var mPlayer: MediaPlayer? = null
 
     //buttons visibility
@@ -62,11 +58,6 @@ class RoomViewModel @Inject constructor(
     var mobileMutableValue = mutableStateOf("")
 
     init {
-        //Initialize Room & get initial data
-        val dbInstance = DataBase.getInstance(application)
-        val userDao = dbInstance.UserDao()
-        val ringDao = dbInstance.RingDao()
-        repository = Repository(userDao, ringDao)
         readContactList = repository.getContacts
         readFileUri = repository.getUri()
     }
@@ -162,4 +153,3 @@ class RoomViewModel @Inject constructor(
         startRingTone.startStopRingtone(mPlayer,false)
     }
 }
-

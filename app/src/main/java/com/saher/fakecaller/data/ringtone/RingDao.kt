@@ -5,6 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Inject
 
 @Dao
 interface RingDao {

@@ -12,13 +12,11 @@ object Navigate{
         navController.navigate(NavGraph.Destinations.contact)
     }
 
-    fun popBackStack(navController: NavController) {
-        navController.popBackStack()
-    }
-
     fun toCallingPage(navController: NavController) {
         navController.navigate(NavGraph.Destinations.calling)
     }
 
-
+    fun popBackStack(navController: NavController) {
+        navController.popBackStack()
+    }
 }

@@ -13,6 +13,7 @@ import com.saher.fakecaller.ui.components.contactpage.ContactPage
 import com.saher.fakecaller.ui.components.settings.SettingsPage
 import com.saher.fakecaller.util.navigation.NavGraph.Destinations
 import com.saher.fakecaller.ui.theme.FakeCallerTheme
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Composable
 fun NavigationComponent(roomViewModel: RoomViewModel, context: Context, navController: NavHostController) {

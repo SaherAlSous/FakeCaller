@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.saher.fakecaller.data.RoomViewModel
+import com.saher.fakecaller.util.navigation.Navigate
 
 @Composable
 fun SaveButton(navController: NavController,roomViewModel: RoomViewModel) {
@@ -19,5 +20,5 @@ fun SaveButton(navController: NavController,roomViewModel: RoomViewModel) {
 
 private fun saveAction(navController: NavController,roomViewModel: RoomViewModel){
     roomViewModel.createAndSaveContact()
-    navController.popBackStack()
+    Navigate.popBackStack(navController)
 }

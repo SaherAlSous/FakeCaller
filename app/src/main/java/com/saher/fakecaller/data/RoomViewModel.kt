@@ -130,7 +130,7 @@ class RoomViewModel @Inject constructor(
     var contactList by mutableStateOf(listOf<Contact>())
 
     //Erase data values here.
-    private fun eraseData() {
+    fun eraseData() {
         contactId = mutableStateOf(null)
         photoUri = mutableStateOf(null)
         nameMutableValue = mutableStateOf("")

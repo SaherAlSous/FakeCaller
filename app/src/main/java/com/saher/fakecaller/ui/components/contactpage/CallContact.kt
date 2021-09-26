@@ -17,6 +17,7 @@ import com.saher.fakecaller.R
 import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.util.StartRingTone
 import com.saher.fakecaller.util.navigation.NavGraph
+import com.saher.fakecaller.util.navigation.Navigate
 
 @Composable
 fun CallContact(roomViewModel: RoomViewModel,navController: NavController) {
@@ -39,6 +40,6 @@ fun CallContact(roomViewModel: RoomViewModel,navController: NavController) {
 
 fun startCaller(roomViewModel: RoomViewModel,navController: NavController) {
     roomViewModel.startRingtone()
-    navController.navigate(NavGraph.Destinations.calling)
     roomViewModel.visible.value = true
+    Navigate.toCallingPage(navController)
 }

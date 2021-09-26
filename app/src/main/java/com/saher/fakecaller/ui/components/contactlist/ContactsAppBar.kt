@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.R
 import com.saher.fakecaller.util.navigation.NavGraph
+import com.saher.fakecaller.util.navigation.Navigate
 
 @Composable
 fun AppBar(navController: NavController) {
@@ -28,7 +29,7 @@ fun AppBar(navController: NavController) {
                 modifier =
                 Modifier
                     .padding(start = 15.dp)
-                    .clickable { navController.navigate(NavGraph.Destinations.settings) }
+                    .clickable { Navigate.toSettingPage(navController) }
             )
         }
     )

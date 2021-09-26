@@ -7,7 +7,6 @@ class NavGraph(navController: NavController) {
     val fakeCaller: () -> Unit ={
         navController.navigate(home)
     }
-
     object Destinations{
         const val home = "home"
         const val settings = "settings"

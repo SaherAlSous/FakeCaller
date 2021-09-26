@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.R
-import com.saher.fakecaller.util.navigation.NavGraph
+import com.saher.fakecaller.util.navigation.Navigate
 
 
 @Composable
@@ -27,8 +27,9 @@ fun SettingsAppBar(navController: NavController) {
                 modifier =
                 Modifier
                     .padding(start = 15.dp)
-                    .clickable { navController.popBackStack() }
+                    .clickable { Navigate.popBackStack(navController) }
             )
         }
     )
 }
+

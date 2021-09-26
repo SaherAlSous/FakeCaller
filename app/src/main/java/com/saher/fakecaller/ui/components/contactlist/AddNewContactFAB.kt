@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.util.navigation.NavGraph
+import com.saher.fakecaller.util.navigation.Navigate
 
 @Composable
 fun AddNewContactFAB(roomViewModel: RoomViewModel,navController: NavController) {
@@ -30,6 +31,6 @@ fun AddNewContactFAB(roomViewModel: RoomViewModel,navController: NavController) 
 }
 
 fun PrepareForContact(roomViewModel: RoomViewModel,navController: NavController) {
-    navController.navigate(NavGraph.Destinations.contact)
+    Navigate.toContact(navController)
     roomViewModel.updateContactBoolean = false
 }

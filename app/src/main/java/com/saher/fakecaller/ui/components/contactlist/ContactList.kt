@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import com.saher.fakecaller.data.RoomViewModel
 import com.saher.fakecaller.data.contacts.Contact
 import com.saher.fakecaller.util.navigation.NavGraph
+import com.saher.fakecaller.util.navigation.Navigate
 
 @Composable
 fun ContactList(roomViewModel:RoomViewModel,navController: NavController) {
@@ -18,7 +19,7 @@ fun ContactList(roomViewModel:RoomViewModel,navController: NavController) {
     LazyColumn(modifier = Modifier.layoutId("lazyColumn")){
         items(contacts){ contact ->
             ProfileCard(roomViewModel,contact){
-                navController.navigate(NavGraph.Destinations.contact)
+                Navigate.toContact(navController)
                 updateValues(contact, roomViewModel)
             }
         }

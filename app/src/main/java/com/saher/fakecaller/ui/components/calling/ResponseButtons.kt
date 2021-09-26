@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.R
 import com.saher.fakecaller.data.RoomViewModel
+import com.saher.fakecaller.util.navigation.Navigate
 
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -94,7 +95,7 @@ fun endCall(
     navController: NavController,
     roomViewModel: RoomViewModel
 ) {
-    navController.popBackStack()
+    Navigate.popBackStack(navController)
     roomViewModel.endTimer()
 }
 
@@ -109,5 +110,5 @@ private fun rejectCall(
     navController: NavController
 ) {
     roomViewModel.stopRingtone()
-    navController.popBackStack()
+    Navigate.popBackStack(navController)
 }

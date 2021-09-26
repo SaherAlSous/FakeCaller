@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.saher.fakecaller.R
 import com.saher.fakecaller.data.RoomViewModel
+import com.saher.fakecaller.util.navigation.Navigate
 import java.util.*
 
 @Composable
@@ -38,11 +39,7 @@ fun ContactPageBar(roomViewModel: RoomViewModel,navController: NavController,onB
 
 fun getBackAndUpdateValue(roomViewModel: RoomViewModel, navController: NavController,onBack:()-> Unit) {
     onBack.invoke()
-    navController.popBackStack()
-    roomViewModel.contactId = mutableStateOf(null)
-    roomViewModel.photoUri = mutableStateOf(null)
-    roomViewModel.nameMutableValue = mutableStateOf("")
-    roomViewModel.landMutableValue = mutableStateOf("")
-    roomViewModel.mobileMutableValue= mutableStateOf("")
+    Navigate.popBackStack(navController)
+    roomViewModel.eraseData()
 }
 
